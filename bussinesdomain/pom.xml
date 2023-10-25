@@ -71,5 +71,6 @@
 	<modules>
 		<module>customer</module>
 		<module>products</module>
+		<module>transactions</module>
 	</modules>
 </project>
