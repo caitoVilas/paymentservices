@@ -4,28 +4,39 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.paymentservices</groupId>
-		<artifactId>paymentservicesparent</artifactId>
+		<artifactId>infrastructuredomain</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.paymentservices</groupId>
-	<artifactId>infrastructuredomain</artifactId>
+	<artifactId>eureka-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>infrastructuredomain</name>
+	<name>eureka-server</name>
 	<description>Demo project for Spring Boot</description>
-	<packaging>pom</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+		</dependency>
+	</dependencies>
+
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
-	<modules>
-		<module>eureka-server</module>
-	</modules>
 
 </project>
