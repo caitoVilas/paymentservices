@@ -66,6 +66,8 @@ public class CustomerController{
             String productName = this.getProductName(x.getId());
             x.setProductName(productName);
         });
+        List<?> transactions = this.getTransactions(customer.getIban());
+        customer.setTransactions(transactions);
         return customer;
     }
 
@@ -79,6 +81,20 @@ public class CustomerController{
                 .retrieve().bodyToMono(JsonNode.class).block();
         String name = block.get("name").asText();
         return name;
+    }
+
+    private List<?> getTransactions(String iban){
+        WebClient build = webclient.clientConnector(new ReactorClientHttpConnector(client))
+                .baseUrl("http://localhost:8083/transactions")
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+        List<?> transactions = build.method(HttpMethod.GET)
+                .uri(uriBuilder -> uriBuilder
+                        .path("/customers/transactions")
+                        .queryParam("ibanAccount", iban)
+                        .build())
+                .retrieve().bodyToFlux(Object.class).collectList().block();
+        return transactions;
     }
 }
 
