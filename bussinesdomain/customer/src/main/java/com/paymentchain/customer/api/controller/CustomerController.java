@@ -7,6 +7,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.epoll.EpollChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,9 @@ import java.util.concurrent.TimeUnit;
 public class CustomerController{
     private final CustomerRepository customerRepository;
     private final WebClient.Builder webclient;
+
+    @Value("${user.role}")
+    private String role;
 
     public CustomerController(CustomerRepository customerRepository, WebClient.Builder webclient) {
         this.customerRepository = customerRepository;
@@ -43,6 +47,7 @@ public class CustomerController{
     @GetMapping
     public List<Customer> getAll(){
         List<Customer> customers = customerRepository.findAll();
+        System.out.println("---> el rol es " + role);
         return customers;
     }
 
