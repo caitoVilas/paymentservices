@@ -4,21 +4,33 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.paymentservices</groupId>
-		<artifactId>paymentservicesparent</artifactId>
+		<artifactId>infrastructuredomain</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.paymentservices</groupId>
-	<artifactId>infrastructuredomain</artifactId>
+	<artifactId>admin-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>infrastructuredomain</name>
+	<name>admin-server</name>
 	<description>Demo project for Spring Boot</description>
-	<packaging>pom</packaging>
+
+	<properties>
+		<spring-boot-admin.version>2.5.5</spring-boot-admin.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-server</artifactId>
+			<version>${spring-boot-admin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -30,11 +42,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<modules>
-		<module>eureka-server</module>
-		<module>admin-server</module>
-		<module>config-server</module>
-	</modules>
 
 </project>
